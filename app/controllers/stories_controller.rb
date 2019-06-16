@@ -30,8 +30,8 @@ class StoriesController < ApplicationController
 
   #edit
   get '/stories/:id/edit' do
-    find_story
     if logged_in?
+      find_story
       if user_story?(@story)
         erb :'/stories/edit'
       else
@@ -44,6 +44,7 @@ class StoriesController < ApplicationController
 
   #
   patch '/stories/:id' do
+    find_story
     if logged_in?
       if user_story?(@story)
         @story.update(name: params[:name], author: params[:author])
