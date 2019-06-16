@@ -18,17 +18,36 @@ class UsersController < ApplicationController
       #redirect to user's landing page(show? index? dashboard?)
       redirect "users/#{@user.username}"
     else
+      redirect '/login'
     end
 
   end
 
   #signup
   get '/signup' do
+    erb :signup
+  end
+
+  post '/users' do
+    if params[:username] != "" && params[:email] != "" && params[:password] != ""
+      @user = User.create(params)
+      session[:user_id] = @user.id
+      redirect "/users/#{@user.username}" #creates a new HTTP request
+    else
+      redirect '/signup'
+    end
   end
 
   #user SHOW route
   get '/users/:username' do
-    
+    @user = User.find_by(username: params[:username])
+
+    erb :'/users/show'
+  end
+
+  get '/logout' do
+    session.clear
+    redirect '/'
   end
 
 end

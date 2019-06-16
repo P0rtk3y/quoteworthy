@@ -34,11 +34,13 @@
     max-width: 960px;
     padding: 2.25%; /* 18px / 800px */
     width: 85%;
+    text-align: center;
   }
 
   h1 {
     font-size: 36px;
     line-height: 54px;
+    text-align: center
   }
 
   h2 {

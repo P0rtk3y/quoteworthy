@@ -4,4 +4,6 @@ class User < ActiveRecord::Base
   has_secure_password
   has_many :stories
   has_many :quotes
+
+  validates :email, presence: {message: "is empty"}
 end
