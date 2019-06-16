@@ -1,1 +1,9 @@
-
+<h2>Edit your Story Space:</h2>
+  <form action="/stories/<%=@story.id%>" method="POST">
+    <input type="hidden" name="_method" value="PATCH">
+    <label for="name"></label>
+    <textarea name="name" style="width: auto; height: auto"><%=@story.name%></textarea>
+    <label for="author"></label>
+    <textarea name="author" style="width: auto; height: auto"><%=@story.author%></textarea>
+    <input type="submit" value="Edit Story">
+  </form>

@@ -21,13 +21,51 @@ class StoriesController < ApplicationController
 
   #show
   get '/stories/:id' do
-    @story = Story.find(params[:id])
+    if !logged_in?
+      redirect '/'
+    end
+    find_story
     erb :'/stories/show'
   end
 
   #edit
   get '/stories/:id/edit' do
-    erb :'/stories/edit'
+    find_story
+    if logged_in?
+      if user_story?(@story)
+        erb :'/stories/edit'
+      else
+        redirect "users/#{current_user.username}"
+      end
+    else
+      redirect '/'
+    end
+  end
+
+  #
+  patch '/stories/:id' do
+    if logged_in?
+      if user_story?(@story)
+        @story.update(name: params[:name], author: params[:author])
+        redirect "/stories/#{@story.id}"
+      else
+        redirect "users/#{current_user.username}"
+      end
+    else
+      redirect '/'
+    end
+  end
+
+  get '/stories' do
+    @user = current_user
+    @stories = Story.all
+    erb :'stories/index'
+  end
+
+  private
+
+  def find_story
+    @story = Story.find(params[:id])
   end
 
 end

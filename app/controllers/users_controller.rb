@@ -10,17 +10,20 @@ class UsersController < ApplicationController
   # creates a session using a key/value pair.
   post '/login' do
     #Find user. Must include "username:" as key otherwise first username found will be returned.
-    @user = User.find_by(username: params[:username])
-    #authenticate using email/oassword combo
-    if @user.authenticate(params[:password])
-      #log the user in/create user session
-      session[:user_id] = @user.id #logs user in
-      #redirect to user's landing page(show? index? dashboard?)
-      redirect "users/#{@user.username}"
+    if @user = User.find_by(username: params[:username])
+      #authenticate using email/oassword combo
+      if @user.authenticate(params[:password])
+        #log the user in/create user session
+        session[:user_id] = @user.id #logs user in
+        #redirect to user's landing page(show? index? dashboard?)
+        redirect "users/#{@user.username}"
+      else
+        flash[:notice] = "Invalid login. Please try again."
+        redirect '/login'
+      end
     else
-      flash[:notice] = "Invalid login. Please try again."
-      redirect '/login'
-    end
+      redirect '/signup'
+    end 
   end
 
   #signup
