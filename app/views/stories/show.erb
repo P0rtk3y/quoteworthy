@@ -1,5 +1,9 @@
-<h2>Quoteworthies from <%=@story.name%> by <%=@story.author%>:</h2>
+<h2>Quoteworthies from <%=@story.name%> <br>by <%=@story.author%>:</h2>
 
-<% if user_story?(@story) %>
+<%if user_story?(@story) %>
   <a href="/stories/<%=@story.id%>/edit"><input type="submit" value="Edit"></a>
+  <form action="/stories/<%=@story.id%>" method="POST">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete">
+  </form>
 <% end %>

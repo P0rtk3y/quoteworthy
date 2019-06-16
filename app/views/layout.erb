@@ -20,7 +20,9 @@
         <%= yield %>
 
       <footer class="branding">
-        <a href='/logout'><input type="submit" value="Logout"></a>
+        <% if logged_in? %>
+          <a href='/logout'><input type="submit" value="Logout"></a>
+        <% end %>
         <small>&copy; 2019 <strong>Quoteworthy</strong></small>
       </footer>
     </div>

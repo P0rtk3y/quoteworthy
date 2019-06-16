@@ -57,12 +57,19 @@ class StoriesController < ApplicationController
   end
 
   get '/stories' do
-    @user = current_user
     @stories = Story.all
     erb :'stories/index'
   end
 
-  private
+  delete '/stories/:id' do
+    find_story
+    if user_story?(@story)
+      @story.destroy
+    end
+    redirect '/stories'
+  end
+
+  private #methods scoped to class
 
   def find_story
     @story = Story.find(params[:id])

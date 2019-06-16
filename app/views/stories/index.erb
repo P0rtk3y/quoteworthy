@@ -1,6 +1,8 @@
-<h2>Here Are All the Story Spaces:</h2>
+<h2>Your Story Spaces:</h2>
 <%@stories.each do |story|%>
+  <%if story.user_id == current_user.id%>
   <ul>
-    <li><a href="/stories/<%=story.id%>"><%=story.id%>. <%=story.name%> by <%=story.author%></a></li>
+    <li><a href="/stories/<%=story.id%>"><%=story.name%> by <%=story.author%></a></li>
   </ul>
+  <%end%>
 <%end%>

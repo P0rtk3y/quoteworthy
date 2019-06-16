@@ -31,7 +31,7 @@
     -webkit-box-shadow: 0 0 10px rgba(0,0,0,.3);
     box-shadow: 0 0 10px rgba(0,0,0,.3);
     margin: 16px auto;
-    max-width: 960px;
+    max-width: 780px;
     padding: 2.25%; /* 18px / 800px */
     width: 85%;
     text-align: center;
@@ -40,7 +40,7 @@
   h1 {
     font-size: 36px;
     line-height: 54px;
-    text-align: center
+    text-align: center;
   }
 
   h2 {
@@ -48,15 +48,19 @@
     font-size: 24px;
     line-height: 36px;
     margin-bottom: 16px;
+    text-align: center;
   }
 
   h3 {
     font-size: 18px;
     line-height: 36px;
+    text-align: center;
   }
 
   p {
     margin-bottom: 18px;
+    text-align: center;
+    font-size: 16px;
   }
 
   .main {
@@ -65,20 +69,20 @@
 
   .content {
     text-align: center;
-    width: 60%; /* 480px / 800px */
+     /* 480px / 800px */
   }
 
-  .sidebar {
+  /* .sidebar {
     background-color: #914321;
     border: 1px solid #ccc;
     float: right;
     padding: 2.08333333333%; /* 5px / 240px */
-    width: 30%; /* 240px / 800px */
+    /* width: 30%; /* 240px / 800px */
   }
 
-  .sidebar ul {
+  /* .sidebar ul {
     font-size: 14px;
-  }
+  } */
 
   .branding {
     clear: both;
@@ -97,19 +101,21 @@
     -webkit-box-shadow: none;
     box-shadow: none;
     width: auto;
+    text-align: center;
   }
 
-  .content, .sidebar {
+  /* .content, .sidebar {
+    text-align: center;
     float: none;
     width: 100%;
-  }
+  } */
 
-  .sidebar {
-    background: #914321;
+  /* .sidebar {
+    background: white;
     border: none;
     border-top: 2px solid #ccc;
     padding: 0;
-  }
+  } */
 
   h1 {
     font-size: 24px;
