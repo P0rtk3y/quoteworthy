@@ -28,7 +28,7 @@ class UsersController < ApplicationController
 
   #user SHOW route
   get '/users/:username' do
-    "this will be the user show route"
+    
   end
 
 end
