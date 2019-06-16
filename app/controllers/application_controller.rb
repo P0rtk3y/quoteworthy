@@ -3,14 +3,14 @@ require './config/environment'
 class ApplicationController < Sinatra::Base
 
   configure do
-    set :public_folder, 'public'
-    set :views, 'app/views'
+    set :public_folder, 'public' #tells sinatra where public files such as images are located
+    set :views, 'app/views' #where Sinatra will look when files are rendered
 
-    enable :sessions
-    set :session_secret, "quote_a_bookling"
+    enable :sessions #logs a user in using a sessions hash
+    set :session_secret, "quote_a_bookling" #extra layer of security
   end
 
-  get "/" do
+  get '/' do
     erb :welcome
   end
 
