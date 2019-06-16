@@ -46,11 +46,15 @@ class StoriesController < ApplicationController
   patch '/stories/:id' do
     find_story
     if logged_in?
-      if user_story?(@story)
-        @story.update(name: params[:name], author: params[:author])
-        redirect "/stories/#{@story.id}"
+      if params[:name] != "" && params[:author] != ""
+        if user_story?(@story)
+          @story.update(name: params[:name], author: params[:author])
+          redirect "/stories/#{@story.id}"
+        else
+          redirect "users/#{current_user.username}"
+        end
       else
-        redirect "users/#{current_user.username}"
+        redirect "/stories/#{@story.id}/edit"
       end
     else
       redirect '/'
