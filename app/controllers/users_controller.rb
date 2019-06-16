@@ -18,9 +18,9 @@ class UsersController < ApplicationController
       #redirect to user's landing page(show? index? dashboard?)
       redirect "users/#{@user.username}"
     else
+      flash[:notice] = "Invalid login. Please try again."
       redirect '/login'
     end
-
   end
 
   #signup
@@ -34,6 +34,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect "/users/#{@user.username}" #creates a new HTTP request
     else
+      flash[:notice] = "Invalid Entry. Please complete all fields."
       redirect '/signup'
     end
   end
@@ -41,7 +42,6 @@ class UsersController < ApplicationController
   #user SHOW route
   get '/users/:username' do
     @user = User.find_by(username: params[:username])
-
     erb :'/users/show'
   end
 
