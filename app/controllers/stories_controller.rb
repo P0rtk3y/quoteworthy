@@ -55,6 +55,7 @@ class StoriesController < ApplicationController
           redirect "users/#{current_user.username}"
         end
       else
+        flash[:notice] = "Invalid Entry. Please complete all fields."
         redirect "/stories/#{@story.id}/edit"
       end
     else

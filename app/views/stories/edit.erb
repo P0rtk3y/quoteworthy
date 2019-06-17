@@ -1,4 +1,7 @@
 <h2>Edit your Story Space:</h2>
+<%if flash[:notice]%>
+  <h3><%= flash[:notice]%></h3>
+<%end%>
   <form action="/stories/<%=@story.id%>" method="POST">
     <input type="hidden" name="_method" value="PATCH">
     <label for="name"></label>
