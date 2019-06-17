@@ -1,6 +1,16 @@
 <h2>Quoteworthies from <%=@story.name%> <br>by <%=@story.author%>:</h2>
 
 <%if user_story?(@story) %>
+
+  <%@quotes.each do |quote|%>
+    <ul>
+      <li><%=quote.content%></li>
+    </ul>
+  <%end%>
+
+  <br><br><br>
+  <a href="/stories/<%=@story.id%>/quotes/edit"><input type="submit" value="Edit Quote"></a>
+  <a href="/stories/<%=@story.id%>/quotes/new"><input type="submit" value="Add Quote"></a><br>
   <a href="/stories/<%=@story.id%>/edit"><input type="submit" value="Edit Heading"></a>
   <form action="/stories/<%=@story.id%>" method="POST">
     <input type="hidden" name="_method" value="DELETE">

@@ -26,6 +26,7 @@ class StoriesController < ApplicationController
       redirect '/'
     end
     find_story
+    @quotes = Quote.all.select{|quote| quote.story_id == params[:id].to_i}
     erb :'/stories/show'
   end
 
@@ -81,5 +82,6 @@ class StoriesController < ApplicationController
   def find_story
     @story = Story.find(params[:id])
   end
+
 
 end

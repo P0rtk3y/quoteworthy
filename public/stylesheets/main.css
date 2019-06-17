@@ -88,6 +88,14 @@
     clear: both;
   }
 
+  input {
+    width: auto;
+  }
+
+  input[type=text] {
+    width: 100px;
+  }
+
   footer.branding {
     border-top: 2px solid #ccc;
     margin-top: 20px;

@@ -1,0 +1,9 @@
+<h2>Add a Quote to <%=@story.name%>:</h2>
+<%if flash[:notice]%>
+  <h3><%= flash[:notice]%></h3>
+<%end%>
+  <form action="/stories/<%=@story.id%>/quotes" method="POST">
+    <label for="content"></label>
+    <textarea name="content" cols="50" rows="5" placeholder="Add Quote"></textarea>
+    <input type="submit" value="Submit">
+  </form>

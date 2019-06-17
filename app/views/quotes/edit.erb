@@ -1,0 +1,16 @@
+<h2>Edit your Quote:</h2>
+<%if flash[:notice]%>
+  <h3><%= flash[:notice]%></h3>
+<%end%>
+<form action="/stories/<%=@story.id%>/quotes" method="POST">
+  <input type="hidden" name="_method" value="PATCH">
+  <%@quotes.each do |quote|%>
+      <textarea name="<%=quote.id%>" cols="50" rows="5"><%=quote.content%></textarea>
+  <%end%>
+  <br><br>
+  <input type="submit" value="Update">
+</form>
+<form action="/stories/<%=@story.id%>/quotes" method="POST">
+  <input type="hidden" name="_method" value="DELETE"
+  <input type="submit" value="Delete">
+</form>
