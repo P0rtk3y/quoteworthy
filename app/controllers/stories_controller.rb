@@ -15,6 +15,7 @@ class StoriesController < ApplicationController
       @story = Story.create(name: params[:name], author: params[:author], user_id: current_user.id)
       redirect "/stories/#{@story.id}"
     else
+      flash[:notice] = "Invalid Entry. Please complete all fields."
       redirect '/stories/new'
     end
   end

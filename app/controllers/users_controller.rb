@@ -23,7 +23,7 @@ class UsersController < ApplicationController
       end
     else
       redirect '/signup'
-    end 
+    end
   end
 
   #signup
@@ -32,12 +32,17 @@ class UsersController < ApplicationController
   end
 
   post '/users' do
-    if params[:username] != "" && params[:email] != "" && params[:password] != ""
-      @user = User.create(params)
-      session[:user_id] = @user.id
-      redirect "/users/#{@user.username}" #creates a new HTTP request
+    if !User.find_by(username: params[:username])
+      if params[:username] != "" && params[:email] != "" && params[:password] != ""
+        @user = User.create(params)
+        session[:user_id] = @user.id
+        redirect "/users/#{@user.username}" #creates a new HTTP request
+      else
+        flash[:notice] = "Invalid Entry. Please complete all fields."
+        redirect '/signup'
+      end
     else
-      flash[:notice] = "Invalid Entry. Please complete all fields."
+      flash[:notice] = "Username taken. Please try another."
       redirect '/signup'
     end
   end
