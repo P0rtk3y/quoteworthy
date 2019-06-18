@@ -1,7 +1,7 @@
 ENV['SINATRA_ENV'] ||= "development"
 
 require 'bundler/setup'
-Bundler.require(:default, ENV['SINATRA_ENV'])
+Bundler.require(:default, ENV['SINATRA_ENV']) #loads all gemfiles
 
 ActiveRecord::Base.establish_connection(
   :adapter => "sqlite3",

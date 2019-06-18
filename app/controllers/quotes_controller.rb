@@ -23,34 +23,28 @@ class QuotesController < ApplicationController
   end
 
   get '/stories/:id/quotes/edit' do
-    if logged_in?
-      find_story
-      if user_story?(@story)
-        @quotes = Quote.all.select{|quote| quote.story_id == params[:id].to_i}
-        erb :'/quotes/edit'
-      else
-        redirect "users/#{current_user.username}"
-      end
+    redirect_if_not_logged_in
+    find_story
+    if user_story?(@story)
+      @quotes = Quote.all.select{|quote| quote.story_id == params[:id].to_i}
+      erb :'/quotes/edit'
     else
-      redirect '/'
+      redirect "users/#{current_user.username}"
     end
   end
 
   patch '/stories/:id/quotes' do
-    if logged_in?
-      find_story
-      if user_story?(@story)
-        @quotes = Quote.all.select{|quote| quote.story_id == params[:id].to_i}
-          @quotes.map do |quote|
-            quote.update(content: (params[quote.id.to_s] if params[quote.id.to_s] != ""))
-          end
-        @quotes
-        redirect "/stories/#{@story.id}"
-      else
-        redirect "users/#{current_user.username}"
-      end
+    redirect_if_not_logged_in
+    find_story
+    if user_story?(@story)
+      @quotes = Quote.all.select{|quote| quote.story_id == params[:id].to_i}
+        @quotes.map do |quote|
+          quote.update(content: (params[quote.id.to_s] if params[quote.id.to_s] != ""))
+        end
+      @quotes
+      redirect "/stories/#{@story.id}"
     else
-      redirect '/'
+      redirect "users/#{current_user.username}"
     end
   end
 

@@ -7,10 +7,7 @@ class StoriesController < ApplicationController
   end
 
   post '/stories' do
-    if !logged_in?
-      redirect '/'
-    end
-
+    redirect_if_not_logged_in
     if params[:name] != "" && params[:author] != ""
       @story = Story.create(name: params[:name], author: params[:author], user_id: current_user.id)
       redirect "/stories/#{@story.id}"
@@ -22,9 +19,7 @@ class StoriesController < ApplicationController
 
   #show
   get '/stories/:id' do
-    if !logged_in?
-      redirect '/'
-    end
+    redirect_if_not_logged_in
     find_story
     @quotes = Quote.all.select{|quote| quote.story_id == params[:id].to_i}
     erb :'/stories/show'
@@ -32,35 +27,29 @@ class StoriesController < ApplicationController
 
   #edit
   get '/stories/:id/edit' do
-    if logged_in?
-      find_story
-      if user_story?(@story)
-        erb :'/stories/edit'
-      else
-        redirect "users/#{current_user.username}"
-      end
+    redirect_if_not_logged_in
+    find_story
+    if user_story?(@story)
+      erb :'/stories/edit'
     else
-      redirect '/'
+      redirect "users/#{current_user.username}"
     end
   end
 
   #
   patch '/stories/:id' do
+    redirect_if_not_logged_in
     find_story
-    if logged_in?
-      if params[:name] != "" && params[:author] != ""
-        if user_story?(@story)
-          @story.update(name: params[:name], author: params[:author])
-          redirect "/stories/#{@story.id}"
-        else
-          redirect "users/#{current_user.username}"
-        end
+    if params[:name] != "" && params[:author] != ""
+      if user_story?(@story)
+        @story.update(name: params[:name], author: params[:author])
+        redirect "/stories/#{@story.id}"
       else
-        flash[:notice] = "Invalid Entry. Please complete all fields."
-        redirect "/stories/#{@story.id}/edit"
+        redirect "users/#{current_user.username}"
       end
     else
-      redirect '/'
+      flash[:notice] = "Invalid Entry. Please complete all fields."
+      redirect "/stories/#{@story.id}/edit"
     end
   end
 
@@ -77,7 +66,7 @@ class StoriesController < ApplicationController
     redirect '/stories'
   end
 
-  private #methods scoped to class
+  private #helper methods scoped to class
 
   def find_story
     @story = Story.find(params[:id])

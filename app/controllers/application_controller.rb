@@ -32,6 +32,13 @@ class ApplicationController < Sinatra::Base
     def user_story?(story)
       story.user_id == current_user.id
     end
+
+    def redirect_if_not_logged_in
+      if !logged_in?
+        flash[:notice] = "Sorry, you must be logged in."
+        redirect '/'
+      end
+    end
   end
 
 end
